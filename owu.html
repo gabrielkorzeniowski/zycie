@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>OWU Grupowe</title>
+  <link rel="icon" type="image/png" href="ksiazka.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e7f0fb;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      padding: 5px;
+      flex-wrap: wrap;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+      font-weight: 600;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background-color: #90caf9;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: 100%;
+      justify-content: flex-start;
+      font-weight: 500;
+      color: #000; /* czarny tekst dla lepszej czytelności */
+    }
+
+    button:hover {
+      background-color: #64b5f6;
+      color: #fff;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>OWU Grupowe</h1>
+    <div class="menu">
+      
+      <button onclick="window.open('Extra-DD.pdf', '_blank')">
+        <img src="list.png" alt="Ikona 4" class="icon" /> EXTRA DD <img src="inop.png" alt="Ikona 4" class="icon" />
+      </button>
+
+      <button onclick="window.open('owu-2012-01.html', '_blank')">
+        <img src="list.png" alt="Ikona 5" class="icon" /> 2012/01
+      </button>
+
+      <button onclick="window.open('2012-02.pdf', '_blank')">
+        <img src="list.png" alt="Ikona 6" class="icon" /> 2012/02 <img src="inop.png" alt="Ikona 4" class="icon" />
+      </button>
+
+      <button onclick="window.open('2015-01.pdf', '_blank')">
+        <img src="list.png" alt="Ikona 4" class="icon" /> 2015/01 <img src="inop.png" alt="Ikona 4" class="icon" />
+      </button>
+
+      <button onclick="window.open('2015-02.pdf', '_blank')">
+        <img src="list.png" alt="Ikona 4" class="icon" /> 2015/02 <img src="inop.png" alt="Ikona 4" class="icon" />
+      </button>
+
+<button onclick="window.open('owu-2018.html', '_blank')">
+        <img src="list.png" alt="Ikona 4" class="icon" /> 2018/01
+      </button>
+
+<button onclick="window.open('owu-2024.html', '_blank')">
+        <img src="list.png" alt="Ikona 4" class="icon" /> 2024
+      </button>
+
+<button onclick="window.open('https://edu.warta.pl/4ses/servlet/MainServlet?wbts:page=kb.content:show&id_kb_content=100000013800', '_blank')">
+        <img src="list.png" alt="Ikona 4" class="icon" /> EDU
+      </button>
+
+    </div>
+
+  </div>
+</body>
+</html>

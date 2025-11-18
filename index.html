@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu Aplikacji</title>
+  <link rel="icon" type="image/png" href="menu.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      padding: 40px;
+      flex-wrap: wrap;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+      font-weight: 600;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background-color: #c9c9c9;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: 100%;
+      justify-content: flex-start;
+      font-weight: 500;
+      color: #000; /* czarny tekst dla lepszej czytelności */
+    }
+
+    button:hover {
+      background-color: #b0b0b0;
+      color: #fff;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- OKNO 1 - wypełnione -->
+  <div class="container">
+    <h1>Grupowe</h1>
+    <div class="menu">
+      
+      <button onclick="window.open('AZP.html', '_blank')">
+        <img src="zebatka.png" alt="Ikona 4" class="icon" /> Helpdesk AZP
+      </button>
+
+      <button onclick="window.open('ProcesSkanowy.html', '_blank')">
+        <img src="list.png" alt="Ikona 5" class="icon" /> Proces skanowy
+      </button>
+
+<button onclick="window.open('owu.html', '_blank')">
+        <img src="ksiazka.png" alt="Ikona 2" class="icon" /> OWU Grupowe
+      </button>
+
+
+      <button onclick="window.open('AplikacjaPD.html', '_blank')">
+        <img src="lista.png" alt="Ikona 4" class="icon" /> Ponowna wysyłka OWU
+      </button>
+
+      <button onclick="window.open('IK_AplikacjaWniosekBB.html', '_blank')">
+        <img src="lista.png" alt="Ikona 4" class="icon" /> Bluebox IK
+      </button>
+
+<button onclick="window.open('vip.html', '_blank')">
+        <img src="vip.png" alt="Ikona 4" class="icon" /> Polisy VIP
+      </button>
+
+    </div>
+<br>EP, HR, KB, LZ, NG, NK, 01 
+  </div>
+
+  <!-- OKNO 2 - szablon -->
+  <div class="container">
+    <h1>Indywidulane</h1>
+
+    <div class="menu">
+
+<button onclick="window.open('eduindywidualne.html', '_blank')">
+        <img src="ksiazka.png" alt="Ikona 2" class="icon" /> EDU Produkty
+      </button>
+
+      <button onclick="window.open('processkanowyindywid.html', '_blank')">
+        <img src="list.png" alt="Ikona 5" class="icon" /> Proces skanowy
+      </button>
+
+
+    </div>
+    <br>AE, AM, AQ, BA, BC, KG, KO, NP, QS, QW, QX, IB
+  </div>
+
+  <!-- OKNO 3 - szablon -->
+  <div class="container">
+    <h1>Aplikacje</h1>
+    <div class="menu">
+
+      <button onclick="window.open('Notatnik.html', '_blank')">
+        <img src="notatnik.png" alt="Ikona 1" class="icon" /> Notatnik
+      </button>
+
+<button onclick="window.open('LITEROWANIE.html', '_blank')">
+        <img src="telefon.png" alt="Ikona 3" class="icon" /> Literowanie
+      </button>
+
+<button onclick="window.open('SMS.html', '_blank')">
+        <img src="sms.png" alt="Ikona 2" class="icon" /> Generator SMS
+      </button>
+
+      <button onclick="window.open('ListaDokumentow.html', '_blank')">
+        <img src="list.png" alt="Ikona 6" class="icon" /> Lista dokumentów 
+      </button>
+
+      <button onclick="window.open('https://www.youtube.com/watch?v=2wYtJwDkKIk', '_blank')">
+        <img src="ogien.png" alt="Ikona 6" class="icon" /> Kominek 
+      </button>
+
+      <button onclick="window.open('kawa.html', '_blank')">
+        <img src="kubek.png" alt="Ikona 6" class="icon" /> Postaw kawę 
+      </button>
+
+    </div>
+
+  </div>
+</body>
+</html>
