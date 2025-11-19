@@ -72,6 +72,54 @@
       object-fit: contain;
       display: block;
     }
+
+    /* --- POWIADOMIENIE "CO NOWEGO?" --- */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(2px);
+      z-index: 998;
+    }
+
+    #popup {
+      position: fixed;
+      width: 50%;
+      max-width: 480px;
+      min-height: 15vh;
+      background: #f3c5c5; 
+      border: 2px solid #8b1e2d;
+      color: #69101b;
+      padding: 20px 25px;
+      border-radius: 14px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: Arial, sans-serif;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    #popup h2 {
+      margin-top: 0;
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    #closePopup {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+      color: #8b1e2d;
+    }
+
+    #closePopup:hover {
+      color: #5d0f19;
+    }
   </style>
 </head>
 <body>
@@ -160,6 +208,34 @@
     </div>
 
   </div>
+
+  <!-- POWIADOMIENIE "CO NOWEGO?" -->
+  <div id="overlay"></div>
+
+  <div id="popup">
+    <div id="closePopup">×</div>
+    <h2>Co nowego?</h2>
+    <p>
+			<ul>
+  <li>Zostały usunięte nieużyteczne aplikacje</li><br>
+  <li>Kolory ikon na pasku mają pasujące kolory do kolorów tła aplikacji</li><br>
+  <li>Powstała aplikacja "Q&amp;A z OWU" w zakładce: <br>Indywidualne -> EDU Produkty</li>
+			</ul>
+	</p>
+  </div>
+  <!-- POWIADOMIENIE "CO NOWEGO?" -->
+  
+  
+  <script>
+    const closeBtn = document.getElementById("closePopup");
+    const popup = document.getElementById("popup");
+    const overlay = document.getElementById("overlay");
+
+    closeBtn.addEventListener("click", () => {
+      popup.style.display = "none";
+      overlay.style.display = "none";
+    });
+  </script>
+
 </body>
 </html>
-
