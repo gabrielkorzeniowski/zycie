@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<title>Workflow WDCI-R</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #e8f5e6;
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .card {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 14px;
+        width: 500px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+        color: #1b5e20;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .question {
+        font-size: 18px;
+        color: #104814;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #6fbf73;
+        border-radius: 8px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .options {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .option {
+        padding: 14px 18px;
+        border-radius: 10px;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        background: #a5d6a7;
+        color: #08350c;
+        text-align: center;
+        transition: 0.25s;
+    }
+
+    .option:hover {
+        background: #81c784;
+        color: #fff;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .result-box {
+        margin-top: 25px;
+        background: #dcedc8;
+        padding: 20px;
+        border-radius: 12px;
+        color: #2e7d32;
+        font-weight: bold;
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Workflow WDCI-R</h2>
+
+    <!-- PYTANIE O DATĘ -->
+    <div id="step-date">
+        <div class="question">Podaj datę zawarcia umowy (dd.mm.rrrr):</div>
+        <input type="text" id="contractDate" placeholder="np. 14.04.2024">
+        <br><br>
+        <button class="option" onclick="processDate()">Dalej</button>
+    </div>
+
+    <!-- PYTANIE DLA WDCI-R 4.5 (KROK 1) -->
+    <div id="step-45-pismo" class="hidden">
+        <div class="question">Czy jest pismo?</div>
+        <div class="options">
+            <button class="option" onclick="select45('pismo')">Jest pismo</button>
+            <button class="option" onclick="select45('brak')">Nie ma pisma</button>
+        </div>
+    </div>
+
+    <!-- PYTANIE „CO ROBIMY?” (dla 4.0, 5.0 i 4.5 krok 2) -->
+    <div id="step-options-main" class="hidden">
+        <div class="question">Co robimy?</div>
+        <div class="options">
+            <button class="option" onclick="finish('su')">Zachowanie SU / podwyższenie składki</button>
+            <button class="option" onclick="finish('skladka')">Zachowanie składki / obniżenie SU</button>
+        </div>
+    </div>
+
+    <!-- ADEKWATNOŚĆ (dla 3.0 i 2.0) -->
+    <div id="step-adek" class="hidden">
+        <div class="question">Czy adekwatność jest zachowana?</div>
+        <div class="options">
+            <button class="option" onclick="finish('adek-tak')">Tak</button>
+            <button class="option" onclick="finish('adek-nie')">Nie</button>
+        </div>
+    </div>
+
+    <!-- WERSJA 1.0 -->
+    <div id="step-10" class="hidden">
+        <div class="question">Co możemy zrobić?</div>
+        <div class="options">
+            <button class="option" onclick="finish('na')">Brak możliwości (N/A)</button>
+        </div>
+    </div>
+
+    <!-- MIEJSCE NA WYNIK KOŃCOWY -->
+    <div id="result" class="result-box"></div>
+
+</div>
+
+<script>
+function parseDate(str) {
+    const parts = str.split(".");
+    if (parts.length !== 3) return null;
+    return new Date(parts[2], parts[1] - 1, parts[0]);
+}
+
+function processDate() {
+    const input = document.getElementById("contractDate").value.trim();
+    const date = parseDate(input);
+
+    if (!date) {
+        alert("Nieprawidłowy format daty.");
+        return;
+    }
+
+    let version = "";
+
+    // USTALANIE WERSJI WDCI-R
+    if (date >= new Date(2024, 3, 14)) version = "5.0";
+    else if (date >= new Date(2023, 1, 19)) version = "4.5";
+    else if (date >= new Date(2022, 0, 30)) version = "4.0";
+    else if (date >= new Date(2020, 8, 1)) version = "3.0";
+    else if (date >= new Date(2017, 5, 14)) version = "2.0";
+    else version = "1.0";
+
+    workflow(version);
+}
+
+function workflow(version) {
+    document.getElementById("step-date").classList.add("hidden");
+
+    if (version === "5.0" || version === "4.0") {
+        document.getElementById("step-options-main").classList.remove("hidden");
+    }
+
+    else if (version === "4.5") {
+        document.getElementById("step-45-pismo").classList.remove("hidden");
+    }
+
+    else if (version === "3.0" || version === "2.0") {
+        document.getElementById("step-adek").classList.remove("hidden");
+    }
+
+    else if (version === "1.0") {
+        document.getElementById("step-10").classList.remove("hidden");
+    }
+}
+
+function select45(type) {
+    // type = 'pismo' albo 'brak'
+    document.getElementById("step-45-pismo").classList.add("hidden");
+    document.getElementById("step-options-main").classList.remove("hidden");
+}
+
+function finish(type) {
+    const box = document.getElementById("result");
+    box.style.display = "block";
+
+    /*  
+    ───────────────────────────────────────────────
+      W TYM MIEJSCU WPISUJESZ SWOJE ROZWIĄZANIA:
+      
+      type przyjmuje wartości:
+        "su"           → zachowanie SU / ↑ składki
+        "skladka"      → zachowanie składki / ↓ SU
+        "adek-tak"     → adekwatność zachowana
+        "adek-nie"     → adekwatność nie zachowana
+        "na"           → tylko dla WDCI-R 1.0
+    ───────────────────────────────────────────────
+    */
+
+    if (type === "su") {
+        box.innerHTML = "🔎 <b>ROZWIĄZANIE:</b><br><br> <!-- TU WSTAW TREŚĆ DLA ZACHOWANIA SU -->";
+    }
+    else if (type === "skladka") {
+        box.innerHTML = "🔎 <b>ROZWIĄZANIE:</b><br><br> <!-- TU WSTAW TREŚĆ DLA ZACHOWANIA SKŁADKI -->";
+    }
+    else if (type === "adek-tak") {
+        box.innerHTML = "🔎 <b>ROZWIĄZANIE:</b><br><br> <!-- TU WSTAW TREŚĆ DLA ADEKWATNOŚĆ = TAK -->";
+    }
+    else if (type === "adek-nie") {
+        box.innerHTML = "🔎 <b>ROZWIĄZANIE:</b><br><br> <!-- TU WSTAW TREŚĆ DLA ADEKWATNOŚĆ = NIE -->";
+    }
+    else if (type === "na") {
+        box.innerHTML = "🔎 <b>ROZWIĄZANIE:</b><br><br> <!-- TU WSTAW TREŚĆ DLA WDCI-R 1.0 (N/A) -->";
+    }
+}
+</script>
+
+</body>
+</html>
