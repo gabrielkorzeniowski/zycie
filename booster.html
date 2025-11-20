@@ -18,7 +18,8 @@
         border-radius: 12px;
         width: 600px;
         box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-        border-left: 10px solid #2e7d32;
+        /* USUNIĘTY ZIELONY PASEK */
+        /* border-left: 10px solid #2e7d32; */
     }
 
     h1 {
@@ -111,7 +112,6 @@ document.getElementById("contractDate").addEventListener("input", function() {
 
     if (!date || isNaN(date)) return;
 
-    // progi
     const v50 = new Date(2024, 3, 14);
     const v45_start = new Date(2023, 1, 19);
     const v45_end = new Date(2024, 3, 13);
@@ -143,7 +143,6 @@ function generateOptions(version) {
     optionsBox.innerHTML = "";
     finalBox.style.display = "none";
 
-    // WDCiR 1.0, 2.0, 3.0 – tylko komunikat
     if (version === "WDCiR 1.0" || version === "WDCiR 2.0" || version === "WDCiR 3.0") {
         optionsBox.innerHTML = `
             <p><b>Standardowe pytanie:</b></p>
@@ -154,7 +153,6 @@ function generateOptions(version) {
         return;
     }
 
-    // WDCiR 4.0 i WDCiR 5.0 → dwa pytania
     if (version === "WDCiR 4.0" || version === "WDCiR 5.0") {
         optionsBox.innerHTML = `
             <p><b>Wybierz wariant:</b></p>
@@ -171,7 +169,6 @@ function generateOptions(version) {
         return;
     }
 
-    // WDCiR 4.5 → najpierw pytanie "czy jest pismo?"
     if (version === "WDCiR 4.5") {
         optionsBox.innerHTML = `
             <p><b>Czy jest pismo?</b></p>
@@ -191,6 +188,7 @@ function generateOptions(version) {
 
 function generateLetterOptions(hasLetter) {
     const optionsBox = document.getElementById("optionsBox");
+
     optionsBox.innerHTML = `
         <p><b>Wybierz wariant:</b></p>
 
