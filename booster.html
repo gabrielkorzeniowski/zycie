@@ -18,8 +18,6 @@
         border-radius: 12px;
         width: 600px;
         box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-        /* USUNIĘTY ZIELONY PASEK */
-        /* border-left: 10px solid #2e7d32; */
     }
 
     h1 {
@@ -143,11 +141,20 @@ function generateOptions(version) {
     optionsBox.innerHTML = "";
     finalBox.style.display = "none";
 
-    if (version === "WDCiR 1.0" || version === "WDCiR 2.0" || version === "WDCiR 3.0") {
+    if (version === "WDCiR 1.0") {
         optionsBox.innerHTML = `
             <p><b>Standardowe pytanie:</b></p>
-            <p>Brak dodatkowych wariantów — obowiązuje procedura właściwa dla ${version}.</p>
-            <!-- TU WPISZ ROZWIĄZANIE DLA ${version} -->
+            <p>Nie dotyczy</p>
+        `;
+        optionsBox.style.display = "block";
+        return;
+    }
+
+    if (version === "WDCiR 2.0" || version === "WDCiR 3.0") {
+        const solution = "Sprawdź adekwatność składki";
+        optionsBox.innerHTML = `
+            <p><b>Standardowe pytanie:</b></p>
+            <p>${solution}</p>
         `;
         optionsBox.style.display = "block";
         return;
@@ -157,11 +164,11 @@ function generateOptions(version) {
         optionsBox.innerHTML = `
             <p><b>Wybierz wariant:</b></p>
 
-            <button class="btnOption" onclick="finalDecision('Zachowanie składki / obniżenie SU')">
+            <button class="btnOption" onclick="finalDecision('${version} - Zachowanie składki', 'Proszę opłacić nową składkę w terminie')">
                 Zachowujemy składkę → obniżamy SU
             </button>
 
-            <button class="btnOption" onclick="finalDecision('Zachowanie SU / podwyższenie składki')">
+            <button class="btnOption" onclick="finalDecision('${version} - Zachowanie SU', 'Proszę udać się do Agenta obsługującego polisę')">
                 Zachowujemy SU → podwyższamy składkę
             </button>
         `;
@@ -189,28 +196,42 @@ function generateOptions(version) {
 function generateLetterOptions(hasLetter) {
     const optionsBox = document.getElementById("optionsBox");
 
-    optionsBox.innerHTML = `
+    if (hasLetter) {
+        optionsBox.innerHTML = `
         <p><b>Wybierz wariant:</b></p>
 
-        <button class="btnOption" onclick="finalDecision('Zachowanie składki / obniżenie SU (4.5)')">
+        <button class="btnOption" onclick="finalDecision('WDCiR 4.5 - jest pismo - zachowanie składki', 'Zweryfikuj pismo')">
             Zachowujemy składkę → obniżamy SU
         </button>
 
-        <button class="btnOption" onclick="finalDecision('Zachowanie SU / podwyższenie składki (4.5)')">
+        <button class="btnOption" onclick="finalDecision('WDCiR 4.5 - jest pismo - zachowanie SU', 'Zweryfikuj pismo')">
             Zachowujemy SU → podwyższamy składkę
         </button>
-    `;
+        `;
+    } else {
+        optionsBox.innerHTML = `
+        <p><b>Wybierz wariant:</b></p>
+
+        <button class="btnOption" onclick="finalDecision('WDCiR 4.5 - brak pisma - zachowanie składki', 'Utwórz zgłoszenie BBX')">
+            Zachowujemy składkę → obniżamy SU
+        </button>
+
+        <button class="btnOption" onclick="finalDecision('WDCiR 4.5 - brak pisma - zachowanie SU', 'Proszę udać się do Agenta obsługującego polisę')">
+            Zachowujemy SU → podwyższamy składkę
+        </button>
+        `;
+    }
 }
 
-function finalDecision(text) {
+function finalDecision(title, solution) {
     const finalBox = document.getElementById("finalBox");
     finalBox.style.display = "block";
 
     finalBox.innerHTML = `
         <h3>Wybrany wariant:</h3>
-        <p><b>${text}</b></p>
+        <p><b>${title}</b></p>
 
-        <!-- TU WPISZ ROZWIĄZANIE DLA: ${text} -->
+        <p><b>Rozwiązanie:</b> ${solution}</p>
     `;
 }
 </script>
