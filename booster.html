@@ -144,7 +144,7 @@ function generateOptions(version) {
 
     if (version === "WDCiR 1.0") {
         optionsBox.innerHTML = `
-            <p><b>Standardowe pytanie:</b></p>
+            <p><b>Rozwiązanie:</b></p>
             <p>Nie dotyczy</p>
         `;
         optionsBox.style.display = "block";
@@ -154,9 +154,9 @@ function generateOptions(version) {
     if (version === "WDCiR 2.0" || version === "WDCiR 3.0") {
         const solution = "Sprawdź adekwatność składki";
         optionsBox.innerHTML = `
-            <p><b>Standardowe pytanie:</b></p>
+            <p><b>Rozwiązanie:</b></p>
             <p>${solution}</p>
-            <button onclick="window.open('https://edu.warta.pl/4ses/servlet/MainServlet?wbts:page=kb.content:show&id_kb_content=100000020185', '_blank')">
+            <button class="btnOption" onclick="window.open('https://edu.warta.pl/4ses/servlet/MainServlet?wbts:page=kb.content:show&id_kb_content=100000020185', '_blank')">
         Sprawdź
       </button>
         `;
