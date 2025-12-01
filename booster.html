@@ -156,6 +156,9 @@ function generateOptions(version) {
         optionsBox.innerHTML = `
             <p><b>Standardowe pytanie:</b></p>
             <p>${solution}</p>
+            <button onclick="window.open('https://edu.warta.pl/4ses/servlet/MainServlet?wbts:page=kb.content:show&id_kb_content=100000020185', '_blank')">
+        Sprawdź
+      </button>
         `;
         optionsBox.style.display = "block";
         return;
