@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Sprawdź typ polisy życiowej</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e6e6e6;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .info {
+      font-size: 0.9em;
+      margin-bottom: 12px;
+      color: #555;
+      background: #fafafa;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      font-size: 1em;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .result {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      display: none;
+    }
+
+    .group {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+
+    .continuation {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .individual {
+      background: #d4edda;
+      color: #155724;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Sprawdzenie typu polisy życiowej</h2>
+
+<div class="box">
+
+  <div class="info">
+    <strong>Budowa numeru polisy życiowej:</strong><br>
+    <code>XX 0000000</code><br>
+    gdzie:<br>
+    <strong>XX</strong> – seria<br>
+    <strong>0000000</strong> – numer
+  </div>
+
+  <label for="polisa">Seria lub numer polisy:</label>
+  <input
+    type="text"
+    id="polisa"
+    placeholder="np. NG, ep, 01, NG1234567"
+    oninput="checkPolicyType()"
+  />
+
+  <div id="result" class="result"></div>
+
+</div>
+
+<script>
+  // ================================
+  // DEFINICJE SERII
+  // ================================
+
+  const GROUP_POLICIES = [
+    "NK","EP","EM","NG","PM","AG","HR","GG","GR","LZ","01","50"
+  ];
+
+  const CONTINUATION_POLICIES = [
+    "EK","EL","ÈQ","ER","IK","IB","AB","BI","BF","AD","RI","BE","51"
+  ];
+
+  // ================================
+  // LOGIKA
+  // ================================
+
+  function normalizeSeries(input) {
+    if (!input) return "";
+    return input
+      .replace(/\s+/g, "")
+      .toUpperCase()
+      .substring(0, 2);
+  }
+
+  function checkPolicyType() {
+    const input = document.getElementById("polisa").value;
+    const resultBox = document.getElementById("result");
+
+    const series = normalizeSeries(input);
+
+    if (series.length < 2) {
+      resultBox.style.display = "none";
+      return;
+    }
+
+    let text = "";
+    let cssClass = "";
+
+    if (GROUP_POLICIES.includes(series)) {
+      text = "Polisa grupowa";
+      cssClass = "group";
+    } else if (CONTINUATION_POLICIES.includes(series)) {
+      text = "Polisa indywidualnej kontynuacji";
+      cssClass = "continuation";
+    } else {
+      text = "Polisa indywidualna";
+      cssClass = "individual";
+    }
+
+    resultBox.className = "result " + cssClass;
+    resultBox.innerText = `Seria: ${series} → ${text}`;
+    resultBox.style.display = "block";
+  }
+</script>
+
+</body>
+</html>
