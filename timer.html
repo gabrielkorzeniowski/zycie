@@ -47,6 +47,7 @@
 
 <script>
 let blinkInterval = null;
+let visible = true;
 
 function updateCountdown() {
     const hourInput = document.getElementById("inputHour").value;
@@ -54,12 +55,8 @@ function updateCountdown() {
 
     const now = new Date();
     const target = new Date();
-
     target.setHours(parseInt(hourInput), 0, 0, 0);
-
-    if (target <= now) {
-        target.setDate(target.getDate() + 1);
-    }
+    if (target <= now) target.setDate(target.getDate() + 1);
 
     const diff = target - now;
 
@@ -73,27 +70,33 @@ function updateCountdown() {
         String(minutes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0");
 
-    // resetowanie migania, jeśli było włączone
+    // resetowanie migania
     if (blinkInterval && diff > 3 * 60 * 1000) {
         clearInterval(blinkInterval);
         blinkInterval = null;
         timer.style.color = "black";
-        timer.style.visibility = "visible";
+        timer.style.opacity = 1;
     }
 
     // Kolor czerwony przy 15 minutach
     if (diff <= 15 * 60 * 1000 && diff > 3 * 60 * 1000) {
         timer.style.color = "red";
-        timer.style.visibility = "visible";
+        timer.style.opacity = 1;
     }
 
-    // Miganie na ostatnie 3 minuty
+    // Łagodne miganie na ostatnie 3 minuty
     if (diff <= 3 * 60 * 1000) {
+        timer.style.color = "red";
         if (!blinkInterval) {
             blinkInterval = setInterval(() => {
-                timer.style.visibility = 
-                    timer.style.visibility === "hidden" ? "visible" : "hidden";
-            }, 250); // 2 Hz miganie
+                if (visible) {
+                    timer.style.opacity = 0.3; // krótko znikające
+                    visible = false;
+                } else {
+                    timer.style.opacity = 1;   // dłużej widoczne
+                    visible = true;
+                }
+            }, 300); // 0.3s interwał, da efekt asymetrycznego pulsowania
         }
     }
 }
