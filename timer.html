@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Odliczanie</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        background: #ffffff;
+    }
+    #timer {
+        font-size: 48px;
+        font-weight: bold;
+        color: #000;
+        transition: color 0.3s;
+    }
+    #inputHour {
+        font-size: 24px;
+        width: 80px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<h2>Odliczanie do godziny</h2>
+
+<input type="number" id="inputHour" min="0" max="23" placeholder="16">
+<div id="timer">--:--:--</div>
+
+<script>
+function updateCountdown() {
+    const hourInput = document.getElementById("inputHour").value;
+    if (hourInput === "") return;
+
+    const now = new Date();
+    const target = new Date();
+
+    target.setHours(parseInt(hourInput), 0, 0, 0);
+
+    // Jeśli godzina już minęła — ustaw na jutro
+    if (target <= now) {
+        target.setDate(target.getDate() + 1);
+    }
+
+    const diff = target - now;
+
+    const hours = Math.floor(diff / 1000 / 60 / 60);
+    const minutes = Math.floor((diff / 1000 / 60) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    const timer = document.getElementById("timer");
+    timer.textContent =
+        String(hours).padStart(2, "0") + ":" +
+        String(minutes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0");
+
+    // Ostatnie 15 minut → czerwony
+    if (diff <= 15 * 60 * 1000) {
+        timer.style.color = "red";
+    } else {
+        timer.style.color = "black";
+    }
+}
+
+// Aktualizacja co 1 sekundę
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
