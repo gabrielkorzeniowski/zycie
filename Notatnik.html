@@ -21,6 +21,21 @@
 
   h2 { margin-bottom: 15px; color: #333; }
 
+.header-bar {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.timer-frame {
+  border: none;
+  width: 220px;   /* dopasuj do timera */
+  height: 60px;   /* dopasuj do timera */
+}
+
   .container {
     display: flex;
     gap: 15px;
@@ -105,7 +120,10 @@
 </head>
 <body>
 
-<h2>Notatnik</h2>
+<div class="header-bar">
+  <h2>Notatnik</h2>
+  <iframe src="timer.html" class="timer-frame" title="Timer"></iframe>
+</div>
 
 <div class="container">
 
