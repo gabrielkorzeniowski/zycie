@@ -46,6 +46,8 @@
 </div>
 
 <script>
+let blinkInterval = null;
+
 function updateCountdown() {
     const hourInput = document.getElementById("inputHour").value;
     if (hourInput === "") return;
@@ -71,7 +73,29 @@ function updateCountdown() {
         String(minutes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0");
 
-    timer.style.color = diff <= 15 * 60 * 1000 ? "red" : "black";
+    // resetowanie migania, jeśli było włączone
+    if (blinkInterval && diff > 3 * 60 * 1000) {
+        clearInterval(blinkInterval);
+        blinkInterval = null;
+        timer.style.color = "black";
+        timer.style.visibility = "visible";
+    }
+
+    // Kolor czerwony przy 15 minutach
+    if (diff <= 15 * 60 * 1000 && diff > 3 * 60 * 1000) {
+        timer.style.color = "red";
+        timer.style.visibility = "visible";
+    }
+
+    // Miganie na ostatnie 3 minuty
+    if (diff <= 3 * 60 * 1000) {
+        if (!blinkInterval) {
+            blinkInterval = setInterval(() => {
+                timer.style.visibility = 
+                    timer.style.visibility === "hidden" ? "visible" : "hidden";
+            }, 250); // 2 Hz miganie
+        }
+    }
 }
 
 setInterval(updateCountdown, 1000);
