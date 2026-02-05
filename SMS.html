@@ -1,158 +1,28 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Generator Wiadomości</title>
-  <link rel="icon" type="image/png" href="sms.png">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <title>Przekierowanie</title>
 
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #e6e6e6;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-    }
+    <!-- Automatyczne przekierowanie -->
+    <meta http-equiv="refresh" content="1; url=https://gabrielkorzeniowski.github.io/zycie/index.html">
 
-    .container {
-      background-color: #f9f9f9;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      max-width: 600px;
-      width: 100%;
-    }
-
-    h2, h3 {
-      text-align: center;
-      color: #333;
-    }
-
-    label {
-      font-weight: bold;
-      margin-top: 15px;
-      display: block;
-    }
-
-    select, textarea, input {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    textarea {
-      height: 100px;
-      resize: vertical;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    button {
-      background-color: #c9c9c9;
-      color: black;
-      border: none;
-      padding: 8px 16px;
-      font-size: 14px;
-      border-radius: 5px;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-      color: white;
-    }
-
-    #output {
-      background-color: #fff;
-      padding: 10px;
-      border: 1px solid #ccc;
-      min-height: 80px;
-      white-space: pre-wrap;
-      margin-top: 10px;
-      border-radius: 5px;
-    }
-  </style>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            color: #374151;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2>Generator Wiadomości</h2>
-
-    <label for="template">Wybierz szablon:</label>
-    <select id="template">
-      <option value="5">Seria i nr polis</option>
-      <option value="1">Numer konta do wpłat</option>
-      <option value="2">Saldo</option>
-      <option value="3">Numer wniosku świadczeniowego</option>
-      <option value="4">Numer zgłoszenia ZG</option>
-      <option value="6">Sumy ubezpieczenia dla poszczególnych ryzyk występujących na polisie</option>
-    </select>
-
-    <label for="data">Wprowadź dane (np. numer zgłoszenia, numer polisy, suma ubezpieczenia):</label>
-    <textarea id="data" placeholder="Tutaj wpisz swoje dane..."></textarea>
-
-    <div class="buttons">
-      <button onclick="generateMessage()">Generuj wiadomość</button>
-      <button onclick="copyMessage()">Kopiuj wiadomość</button>
-    </div>
-
-    <h3>Wygenerowana wiadomość:</h3>
-    <div id="output"></div>
-  </div>
-
-  <script>
-    const templates = {
-      1: "Dzień dobry.\n\nW nawiązaniu do naszej rozmowy telefonicznej przesyłam numer konta do wpłat:\n\n{data}",
-      2: "Dzień dobry.\n\nW nawiązaniu do naszej rozmowy telefonicznej przesyłam saldo polisy:\n\n{data}",
-      3: "Dzień dobry.\n\nW nawiązaniu do naszej rozmowy telefonicznej przesyłam numer wniosku świadczeniowego:\n\n{data}",
-      4: "Dzień dobry.\n\nW nawiązaniu do naszej rozmowy telefonicznej przesyłam numer zgłoszenia:\n\n{data}",
-      5: "Dzień dobry.\n\nW nawiązaniu do naszej rozmowy telefonicznej przesyłam serię i numer polisy:\n\n{data}",
-      6: "Dzień dobry.\n\nW nawiązaniu do naszej rozmowy telefonicznej przesyłam sumę ubezpieczenia dla poszczególnych ryzyk występujących na polisie:\n\n{data}"
-    };
-
-    function generateMessage() {
-      const selectedTemplate = document.getElementById("template").value;
-      const inputData = document.getElementById("data").value.trim();
-
-      if (!inputData) {
-        alert("Proszę wprowadzić dane.");
-        return;
-      }
-
-      const template = templates[selectedTemplate];
-      const message = template.replace("{data}", inputData);
-      document.getElementById("output").innerText = message;
-    }
-
-    function copyMessage() {
-      const output = document.getElementById("output").innerText;
-
-      if (!output) {
-        alert("Brak wiadomości do skopiowania.");
-        return;
-      }
-
-      navigator.clipboard.writeText(output).catch((err) => {
-        alert("Nie udało się skopiować wiadomości.");
-      });
-    }
-  </script>
+<p>Trwa przekierowanie…</p>
 
 </body>
 </html>
