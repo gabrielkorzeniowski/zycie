@@ -1,208 +1,28 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <title>Helpdesk AZP</title>
-  <link rel="icon" type="image/png" href="Bzebatka.png" />
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #e7f0fb;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      color: #333;
-    }
-    .form-container {
-      background:  #f9f9f9;
-      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
-      border-radius: 8px;
-      padding: 25px 30px;
-      max-width: 600px;
-      width: 100%;
-      overflow-y: auto;
-      max-height: 90vh;
-    }
-    h2 {
-      margin-top: 0;
-      margin-bottom: 20px;
-      font-weight: 700;
-      color: black;
-      font-size: 1.6rem;
-      text-align: center;
-    }
-    label {
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-      display: block;
-      color: #444;
-    }
-    select {
-      width: 100%;
-      padding: 8px 10px;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: 1.5px solid #bbb;
-      background-color:  #f9f9f9;
-      transition: border-color 0.3s ease;
-      cursor: pointer;
-      margin-bottom: 15px;
-    }
-    select:focus {
-      outline: none;
-      border-color: black;
-      background-color: #fff;
-      box-shadow: 0 0 8px rgba(0, 80, 158, 0.3);
-    }
-    #documentsContainer {
-      margin-top: 15px;
-      background: #f0f6ff;
-      padding: 15px 18px;
-      border-radius: 6px;
-      border: 1px solid #cbd7ee;
-      max-height: 70vh;
-      overflow-y: auto;
-    }
-    #documentsContainer h3 {
-      margin-top: 0;
-      color: #003b70;
-      font-weight: 700;
-      font-size: 1.2rem;
-      text-align: center;
-    }
-    ul {
-      margin: 10px 0 15px 20px;
-      color: #222;
-      line-height: 1.4;
-      font-size: 0.95rem;
-    }
-    li {
-      margin-bottom: 8px;
-    }
-    h4 {
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: #666;
-      margin: 0;
-      border-top: 1px solid #cbd7ee;
-      padding-top: 10px;
-      font-style: italic;
-      line-height: 1.3;
-      text-align: center;
-    }
-    .hidden {
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Przekierowanie</title>
+
+    <!-- Automatyczne przekierowanie -->
+    <meta http-equiv="refresh" content="1; url=https://gabrielkorzeniowski.github.io/zycie/index.html">
+
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            color: #374151;
+        }
+    </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Instrukcje i dokumenty do AZP</h2>
 
-    <label for="mainCategory">Wybierz kategorię:</label>
-    <select id="mainCategory">
-      <option value="">-- Wybierz kategorię --</option>
-    </select>
+<p>Trwa przekierowanie…</p>
 
-    <div id="documentsContainer" class="hidden">
-      <h3>Szczegóły:</h3>
-      <ul id="documentsList"></ul>
-      <h4>Kontakt i materiały: azp@warta.pl</h4>
-    </div>
-  </div>
-
-  <script>
-    const data = {
-      "Nadawanie uprawnień do AZP": [
-        "Osoba reprezentująca firmę kontaktuje się z RMS lub pisze na azp@warta.pl, by uzyskać wzór formularza.",
-        "Należy wypełnić Załącznik nr 2 (dodanie nowej osoby).",
-        "Osoba obsługująca może zalogować się następnego dnia po nadaniu uprawnień (np. nadanie 12.07 → logowanie od 13.07).",
-        "Data rozpoczęcia uprawnień musi być zweryfikowana w SWV: Grupowe > Polisy > (Pod)Ubezpieczający > Osoby obsługujące > Info o rekordzie (liczy się Data utworzenia).",
-        "Dostęp do AZP zależny od daty polisy: przed startem polisy – dostęp możliwy przed startem ochrony; po rozpoczęciu polisy – dostęp od daty „od” wskazanej przy nadaniu."
-      ],
-      "Logowanie do AZP": [
-        "Login: najczęściej numer AZ, czasem e-mail.",
-        "Hasło: ustalane przez użytkownika lub wysyłane tymczasowo SMS-em (przy resecie).",
-        "Od 14.12.2024 po loginie i haśle system wysyła kod na e-mail.",
-        "Użytkownik podaje nazwę urządzenia (np. „Laptop Zosi”).",
-        "Logowanie z innego urządzenia wymaga ponownego kodu."
-      ],
-      "Problemy z logowaniem – instrukcja pomocy": [
-        "1. Sprawdź status konta (możliwe odblokowanie z poziomu CC – rola ADMIN).",
-        "2. Sprawdź przeglądarkę – najlepiej tryb incognito.",
-        "3. Reset hasła: kliknij 'Odzyskiwanie hasła' w AZP, login to numer AZ; link przychodzi z WartaFZI@warta.pl, tymczasowe hasło SMS-em.",
-        "4. Problemy z uwierzytelnianiem: sprawdź login i hasło; skopiuj hasło z SMS-a do notatnika, a potem wklej do pola logowania.",
-        "5. Zosia jednocześnie Agentem Warty? Musi wylogować się z eAgenta – nie można używać obu systemów naraz.",
-        "6. Brak SMS-a lub maila: sprawdź dane w SWV i popraw e-mail."
-      ],
-      "Polityka haseł": [
-        "Hasło musi mieć minimum 14 znaków.",
-        "Musi zawierać: wielką i małą literę (bez polskich znaków), cyfrę, znak specjalny (!@#...).",
-        "Nie może zawierać danych osobowych.",
-        "Kolejne hasło musi różnić się od poprzedniego."
-      ],
-      "Odebranie uprawnień do AZP": [
-        "Po 6 miesiącach braku logowania następuje odebranie.",
-        "20 dnia miesiąca poprzedzającego wysyłany jest mailing z ostrzeżeniem.",
-        "Potem wysyłane jest pismo do ubezpieczającego.",
-        "Przywrócenie dostępu wymaga oświadczenia podpisanego przez osobę reprezentującą ubezpieczającego (nie Zośkę!).",
-        "Oświadczenie może być wysłane skanem na azp@warta.pl (tylko w tym przypadku).",
-        "Czekamy na nocne zasilenie danych zanim dostęp zostanie przywrócony."
-      ],
-      "Sprawy techniczne i kontakt": [
-        "Problemy techniczne: azp@warta.pl",
-        "Kontakt osoby nieupoważnionej – stosować specjalną procedurę (AZP – kontakt osoby nieupoważnionej).",
-        "Blokada tymczasowa: po 5 błędnych logowaniach trwa 30 minut, nie można jej przyspieszyć."
-      ],
-      "Lista przystąpień": [
-        "Osoby pojawiają się od daty przystąpienia – zazwyczaj od pierwszego dnia miesiąca.",
-        "Jeżeli lista jest niezaakceptowana lub są braki – system AZP wysyła e-mail do osoby obsługującej."
-      ],
-      "Dokumenty i materiały pomocnicze": [
-        "Instrukcje: zmiana formatu daty (import plików), formatowanie daty w Excelu, uzupełnianie list przystąpień, reset haseł, instrukcje zmian danych, polityka haseł.",
-        "Formularze (dla KORPO i MSP): umowy, regulaminy, załączniki: Zał. nr 2 – nadanie uprawnień, Zał. nr 3 – odebranie uprawnień, instrukcje wypełniania."
-      ]
-    };
-
-    const mainCategorySelect = document.getElementById('mainCategory');
-    const documentsContainer = document.getElementById('documentsContainer');
-    const documentsList = document.getElementById('documentsList');
-
-    // Wczytaj kategorie do selecta
-    function loadCategories() {
-      for (const category in data) {
-        const option = document.createElement('option');
-        option.value = category;
-        option.textContent = category;
-        mainCategorySelect.appendChild(option);
-      }
-    }
-
-    // Pokazuje dokumenty dla wybranej kategorii
-    function showDocuments(category) {
-      documentsList.innerHTML = '';
-      if (!category || !data[category]) {
-        documentsContainer.classList.add('hidden');
-        return;
-      }
-      data[category].forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        documentsList.appendChild(li);
-      });
-      documentsContainer.classList.remove('hidden');
-    }
-
-    mainCategorySelect.addEventListener('change', (e) => {
-      showDocuments(e.target.value);
-    });
-
-    loadCategories();
-  </script>
 </body>
 </html>
-
