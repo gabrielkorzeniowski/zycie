@@ -1,169 +1,154 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Polisy życiowe</title>
-    <link rel="icon" type="image/png" href="list.png" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #e6e6e6;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    <meta charset="UTF-8">
+    <title>301 Moved Permanently</title>
 
-    h2 {
-      margin-bottom: 10px;
-      color: #333;
-    }
+    <meta name="robots" content="noindex, nofollow">
 
-    .box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      width: 100%;
-      max-width: 500px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #0f0f0f;
+            color: #d1d5db;
+            font-family: "Courier New", monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .info {
-      font-size: 0.9em;
-      margin-bottom: 12px;
-      color: #555;
-      background: #fafafa;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 4px;
-    }
+        .box {
+            max-width: 820px;
+            padding: 42px 52px;
+            background: #161616;
+            border: 1px solid #3f3f46;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
 
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 6px;
-    }
+        h1 {
+            font-size: 34px;
+            color: #e5e7eb;
+            margin-bottom: 8px;
+        }
 
-    input {
-      width: 96%;
-      padding: 8px;
-      font-size: 1em;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
+        h2 {
+            font-size: 17px;
+            color: #9ca3af;
+            margin-bottom: 26px;
+            font-weight: normal;
+        }
 
-    .result {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 6px;
-      font-weight: bold;
-      display: none;
-    }
+        p {
+            font-size: 15px;
+            line-height: 1.6;
+        }
 
-    .group {
-      background: #d1ecf1;
-      color: #0c5460;
-    }
+        .path {
+            margin: 22px 0;
+            padding: 14px;
+            background: #0a0a0a;
+            border: 1px solid #52525b;
+            color: #e5e7eb;
+            word-break: break-all;
+            font-size: 14px;
+            cursor: pointer;
+            user-select: all;
+        }
 
-    .continuation {
-      background: #fff3cd;
-      color: #856404;
-    }
+        .path:hover {
+            background: #111111;
+        }
 
-    .individual {
-      background: #d4edda;
-      color: #155724;
-    }
-    .one-line {
-  white-space: nowrap;
-}
-  </style>
+        .copied {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #9ca3af;
+            display: none;
+        }
+
+        .resources {
+            margin-top: 26px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .resources li {
+            margin: 6px 0;
+            word-break: break-all;
+        }
+
+        .note {
+            margin-top: 28px;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Sprawdzenie typu polisy życiowej</h2>
-
 <div class="box">
+    <h1>301 Moved Permanently</h1>
+    <h2>Zawartość została trwale przeniesiona do sieci lokalnej</h2>
 
-  <div class="info">
-    <strong>Budowa numeru polisy życiowej:</strong><br><br>
-    <strong>XX 0000000</strong><br><br>
-    gdzie:<br>
-    <strong>XX</strong> – seria<br>
-    <strong>0000000</strong> – numer
-  </div>
+    <p>
+        Wszystkie zasoby tej strony są dostępne wyłącznie
+        z poziomu <strong>lokalnego serwera</strong>.
+    </p>
 
-  <label for="polisa">Seria lub numer polisy:</label>
-  <input
-    type="text"
-    id="polisa"
-    placeholder="Wpisz serię polisy lub całą polisę"
-    oninput="checkPolicyType()"
-  />
+    <p>
+        Aktualna lokalizacja systemu
+        (kliknij, aby skopiować do schowka):
+    </p>
 
-  <div id="result" class="result"></div>
+    <div class="path" onclick="copyPath()">
+        file://smkato32/Dane$/Konsultant-Operator_DCC/zycie/sprawdz.html
+    </div>
 
-</div>
-<br>
-<div class="one-line">
-  Wesprzyj rozwój aplikacji i kliknij <a class="cup-link" href="kawa.html" target="_blank" rel="noopener noreferrer">tutaj</a>, aby postawić mi kawę
+    <div id="copied" class="copied">
+        Ścieżka została skopiowana do schowka.
+    </div>
+
+    <p>
+        Skopiowany adres należy wkleić bezpośrednio
+        do paska adresu przeglądarki.
+    </p>
+
+    <div class="resources">
+        <p><strong>Dostępne zasoby lokalne:</strong></p>
+        <ul>
+            <li>file://smkato32/Dane$/Konsultant-Operator_DCC/zycie/</li>
+            <li>file://smkato32/Dane$/Konsultant-Operator_DCC/zycie/sprawdz.html</li>
+            <li>file://smkato32/Dane$/Konsultant-Operator_DCC/</li>
+        </ul>
+    </div>
+
+    <div class="note">
+        <p>
+            Strona GitHub Pages pełni wyłącznie funkcję informacyjną.
+        </p>
+        <p>
+            W przypadku braku dostępu upewnij się, że masz połączenie
+            z siecią lokalną oraz odpowiednie uprawnienia
+            do udziału <code>Dane$</code>.
+        </p>
+    </div>
 </div>
 
 <script>
-  // ================================
-  // DEFINICJE SERII
-  // ================================
+    function copyPath() {
+        const text = "file://smkato32/Dane$/Konsultant-Operator_DCC/zycie/sprawdz.html";
 
-  const GROUP_POLICIES = [
-    "NK","EP","EM","NG","PM","AG","HR","GG","GR","LZ","01","50"
-  ];
+        navigator.clipboard.writeText(text).then(() => {
+            const msg = document.getElementById("copied");
+            msg.style.display = "block";
 
-  const CONTINUATION_POLICIES = [
-    "EK","EL","EQ","ER","IK","IB","AB","BI","BF","AD","RI","BE","51"
-  ];
-
-  // ================================
-  // LOGIKA
-  // ================================
-
-  function normalizeSeries(input) {
-    if (!input) return "";
-    return input
-      .replace(/\s+/g, "")
-      .toUpperCase()
-      .substring(0, 2);
-  }
-
-  function checkPolicyType() {
-    const input = document.getElementById("polisa").value;
-    const resultBox = document.getElementById("result");
-
-    const series = normalizeSeries(input);
-
-    if (series.length < 2) {
-      resultBox.style.display = "none";
-      return;
+            setTimeout(() => {
+                msg.style.display = "none";
+            }, 3000);
+        });
     }
-
-    let text = "";
-    let cssClass = "";
-
-    if (GROUP_POLICIES.includes(series)) {
-      text = "Polisa grupowa";
-      cssClass = "group";
-    } else if (CONTINUATION_POLICIES.includes(series)) {
-      text = "Polisa indywidualnej kontynuacji";
-      cssClass = "continuation";
-    } else {
-      text = "Polisa indywidualna";
-      cssClass = "individual";
-    }
-
-    resultBox.className = "result " + cssClass;
-    resultBox.innerText = `Seria: ${series} → ${text}`;
-    resultBox.style.display = "block";
-  }
 </script>
 
 </body>
