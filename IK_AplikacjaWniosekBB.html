@@ -1,191 +1,28 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Formularz zgłoszenia IK</title>
-  <link rel="icon" type="image/png" href="lista.png">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <title>Przekierowanie</title>
 
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #e6e6e6;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-    }
+    <!-- Automatyczne przekierowanie -->
+    <meta http-equiv="refresh" content="1; url=https://gabrielkorzeniowski.github.io/zycie/index.html">
 
-    .container {
-      background-color: #f9f9f9;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      max-width: 700px;
-      width: 100%;
-    }
-
-    h2 {
-      text-align: center;
-      color: #333;
-    }
-
-    label {
-      font-weight: bold;
-      margin-top: 15px;
-      display: block;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    textarea {
-      height: 180px;
-      resize: vertical;
-      white-space: pre-wrap;
-      margin-top: 15px;
-    }
-
-    button {
-      background-color: #c9c9c9;
-      color: black;
-      border: none;
-      padding: 10px 20px;
-      font-size: 14px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 20px;
-      margin-right: 10px;
-    }
-
-button:hover {
-  background-color: #0056b3;
-  color: white;
-}
-  </style>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            color: #374151;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Formularz zgłoszenia IK</h2>
-    <form id="claimForm">
-      <label>Imię:
-        <input type="text" id="firstName" required>
-      </label>
 
-      <label>Nazwisko:
-        <input type="text" id="lastName" required>
-      </label>
+<p>Trwa przekierowanie…</p>
 
-      <label>PESEL:
-        <input type="text" id="pesel" required>
-      </label>
-
-      <label>Numer polisy:
-        <input type="text" id="policyNumber" required>
-      </label>
-
-      <label>Nr telefonu:
-        <input type="tel" id="phoneNumber" required>
-      </label>
-
-      <label>Adres email:
-        <input type="email" id="email" required>
-      </label>
-
-      <label>Ulica:
-        <input type="text" id="address" required>
-      </label>
-
-      <label>Numer domu:
-        <input type="text" id="houseNumber" required>
-      </label>
-
-      <label>Kod pocztowy:
-        <input type="text" id="postalCode" required>
-      </label>
-
-      <label>Miasto:
-        <input type="text" id="city" required>
-      </label>
-
-      <label>Jak chce Pan/Pani otrzymać wniosek?</label>
-      <select id="policyDeliveryMethod">
-        <option value="na email">Na email</option>
-        <option value="korespondencyjnie">Korespondencyjnie</option>
-      </select>
-
-      <label>
-        Czy wyraża Pan/Pani chęć kontynuacji procesu zmierzającego do zawarcia umowy ubezpieczenia na życie przy użyciu adresu e-mail?
-      </label>
-      <select id="consent">
-        <option value="Tak">Tak</option>
-        <option value="Nie">Nie</option>
-      </select>
-
-      <button type="button" onclick="generateDescription()">Generuj opis</button>
-      <button type="button" onclick="copyToClipboard()">Kopiuj opis</button>
-
-      <label>Opis zgłoszenia:</label>
-      <textarea id="description" readonly></textarea>
-    </form>
-  </div>
-
-  <script>
-    function generateDescription() {
-      const firstName = document.getElementById("firstName").value.trim();
-      const lastName = document.getElementById("lastName").value.trim();
-      const pesel = document.getElementById("pesel").value.trim();
-      const policyNumber = document.getElementById("policyNumber").value.trim();
-      const phoneNumber = document.getElementById("phoneNumber").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const address = document.getElementById("address").value.trim();
-      const houseNumber = document.getElementById("houseNumber").value.trim();
-      const postalCode = document.getElementById("postalCode").value.trim();
-      const city = document.getElementById("city").value.trim();
-      const deliveryMethod = document.getElementById("policyDeliveryMethod").value;
-      const consent = document.getElementById("consent").value;
-
-      const fullAddress = `${address} ${houseNumber}, ${postalCode} ${city}`;
-
-      const description =
-`Dane klienta:
-Imię: ${firstName}
-Nazwisko: ${lastName}
-PESEL: ${pesel}
-Numer polisy: ${policyNumber}
-Numer telefonu: ${phoneNumber}
-Adres email: ${email}
-Adres: ${fullAddress}
-
-Klient chce otrzymać wniosek: ${deliveryMethod}
-
-Czy wyraża chęć kontynuacji procesu zawarcia umowy przez e-mail?: ${consent}
-
-Klient został poinformowany o karencjach.`;
-
-      document.getElementById("description").value = description;
-    }
-
-    function copyToClipboard() {
-      const text = document.getElementById("description").value;
-      if (!text) {
-        alert("Najpierw wygeneruj opis.");
-        return;
-      }
-
-      navigator.clipboard.writeText(text)
-
-    }
-  </script>
 </body>
 </html>
