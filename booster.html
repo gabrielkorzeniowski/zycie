@@ -1,244 +1,28 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8" />
-<title>Workflow WDCiR</title>
- <link rel="icon" type="image/png" href="Glist.png">
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #e8f5e9;
-        padding: 40px;
-        display: flex;
-        justify-content: center;
-    }
+    <meta charset="UTF-8">
+    <title>Przekierowanie</title>
 
-    .wrapper {
-        background: #ffffff;
-        padding: 30px 40px;
-        border-radius: 12px;
-        width: 600px;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    }
+    <!-- Automatyczne przekierowanie -->
+    <meta http-equiv="refresh" content="1; url=https://gabrielkorzeniowski.github.io/zycie/index.html">
 
-    h1 {
-        color: #1b5e20;
-        margin-bottom: 25px;
-        text-align: center;
-    }
-
-    label {
-        font-weight: bold;
-        color: #2e7d32;
-    }
-
-    input {
-        width: 96%;
-        padding: 10px;
-        margin-top: 6px;
-        font-size: 16px;
-        border: 2px solid #81c784;
-        border-radius: 6px;
-    }
-
-    .resultBox, .optionBox, .finalBox {
-        background: #f1f8e9;
-        border: 2px solid #aed581;
-        border-radius: 10px;
-        padding: 20px;
-        margin-top: 25px;
-        display: none;
-    }
-
-    .btnOption {
-        background: #66bb6a;
-        padding: 12px 18px;
-        margin: 10px 0;
-        width: 100%;
-        border: none;
-        border-radius: 6px;
-        color: #fff;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .btnOption:hover {
-        background: #4caf50;
-    }
-
-    .finalBox {
-        border: 2px solid #2e7d32;
-        background: #e8f5e9;
-    }
-</style>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            color: #374151;
+        }
+    </style>
 </head>
 <body>
 
-<div class="wrapper">
-
-<h1>Workflow WDCiR</h1>
-
-<label>Data zawarcia umowy:</label>
-<input type="text" id="contractDate" placeholder="dd.mm.rrrr">
-
-<div id="wdcirBox" class="resultBox"></div>
-
-<div id="optionsBox" class="optionBox"></div>
-
-<div id="finalBox" class="finalBox"></div>
-
-</div>
-
-<script>
-function parseDate(str) {
-    const parts = str.split(".");
-    if (parts.length !== 3) return null;
-    return new Date(parts[2], parts[1] - 1, parts[0]);
-}
-
-document.getElementById("contractDate").addEventListener("input", function() {
-    const dateStr = this.value;
-    const date = parseDate(dateStr);
-
-    const wdcirBox = document.getElementById("wdcirBox");
-    const optionsBox = document.getElementById("optionsBox");
-    const finalBox = document.getElementById("finalBox");
-
-    wdcirBox.style.display = "none";
-    optionsBox.style.display = "none";
-    finalBox.style.display = "none";
-
-    if (!date || isNaN(date)) return;
-
-    const v50 = new Date(2024, 3, 14);
-    const v45_start = new Date(2023, 1, 19);
-    const v45_end = new Date(2024, 3, 13);
-    const v40_start = new Date(2022, 0, 30);
-    const v40_end = new Date(2023, 1, 18);
-    const v30_start = new Date(2020, 8, 1);
-    const v30_end = new Date(2022, 0, 29);
-    const v20_start = new Date(2017, 5, 14);
-    const v20_end = new Date(2020, 7, 31);
-
-    let version = "";
-
-    if (date >= v50) version = "WDCiR 5.0";
-    else if (date >= v45_start && date <= v45_end) version = "WDCiR 4.5";
-    else if (date >= v40_start && date <= v40_end) version = "WDCiR 4.0";
-    else if (date >= v30_start && date <= v30_end) version = "WDCiR 3.0";
-    else if (date >= v20_start && date <= v20_end) version = "WDCiR 2.0";
-    else version = "WDCiR 1.0";
-
-    wdcirBox.innerHTML = `<b>Określona wersja: ${version}</b>`;
-    wdcirBox.style.display = "block";
-
-    generateOptions(version);
-});
-
-function generateOptions(version) {
-    const optionsBox = document.getElementById("optionsBox");
-    const finalBox = document.getElementById("finalBox");
-    optionsBox.innerHTML = "";
-    finalBox.style.display = "none";
-
-    if (version === "WDCiR 1.0") {
-        optionsBox.innerHTML = `
-            <p><b>Rozwiązanie:</b></p>
-            <p>Nie dotyczy</p>
-        `;
-        optionsBox.style.display = "block";
-        return;
-    }
-
-    if (version === "WDCiR 2.0" || version === "WDCiR 3.0") {
-        const solution = "Sprawdź adekwatność składki";
-        optionsBox.innerHTML = `
-            <p><b>Rozwiązanie:</b></p>
-            <p>${solution}</p>
-            <button class="btnOption" onclick="window.open('https://edu.warta.pl/4ses/servlet/MainServlet?wbts:page=kb.content:show&id_kb_content=100000020185', '_blank')">
-        Sprawdź
-      </button>
-        `;
-        optionsBox.style.display = "block";
-        return;
-    }
-
-    if (version === "WDCiR 4.0" || version === "WDCiR 5.0") {
-        optionsBox.innerHTML = `
-            <p><b>Wybierz wariant:</b></p>
-
-            <button class="btnOption" onclick="finalDecision('${version} - Zachowanie składki', 'Proszę opłacić nową składkę w terminie')">
-                Zachowujemy składkę → obniżamy SU
-            </button>
-
-            <button class="btnOption" onclick="finalDecision('${version} - Zachowanie SU', 'Proszę udać się do Agenta obsługującego polisę')">
-                Zachowujemy SU → podwyższamy składkę
-            </button>
-        `;
-        optionsBox.style.display = "block";
-        return;
-    }
-
-    if (version === "WDCiR 4.5") {
-        optionsBox.innerHTML = `
-            <p><b>Czy jest pismo?</b></p>
-
-            <button class="btnOption" onclick="generateLetterOptions(true)">
-                Jest pismo
-            </button>
-
-            <button class="btnOption" onclick="generateLetterOptions(false)">
-                Nie ma pisma
-            </button>
-        `;
-        optionsBox.style.display = "block";
-        return;
-    }
-}
-
-function generateLetterOptions(hasLetter) {
-    const optionsBox = document.getElementById("optionsBox");
-
-    if (hasLetter) {
-        optionsBox.innerHTML = `
-        <p><b>Wybierz wariant:</b></p>
-
-        <button class="btnOption" onclick="finalDecision('WDCiR 4.5 - jest pismo - zachowanie składki', 'Zweryfikuj pismo')">
-            Zachowujemy składkę → obniżamy SU
-        </button>
-
-        <button class="btnOption" onclick="finalDecision('WDCiR 4.5 - jest pismo - zachowanie SU', 'Zweryfikuj pismo')">
-            Zachowujemy SU → podwyższamy składkę
-        </button>
-        `;
-    } else {
-        optionsBox.innerHTML = `
-        <p><b>Wybierz wariant:</b></p>
-
-        <button class="btnOption" onclick="finalDecision('WDCiR 4.5 - brak pisma - zachowanie składki', 'Utwórz zgłoszenie BBX')">
-            Zachowujemy składkę → obniżamy SU
-        </button>
-
-        <button class="btnOption" onclick="finalDecision('WDCiR 4.5 - brak pisma - zachowanie SU', 'Proszę udać się do Agenta obsługującego polisę')">
-            Zachowujemy SU → podwyższamy składkę
-        </button>
-        `;
-    }
-}
-
-function finalDecision(title, solution) {
-    const finalBox = document.getElementById("finalBox");
-    finalBox.style.display = "block";
-
-    finalBox.innerHTML = `
-        <h3>Wybrany wariant:</h3>
-        <p><b>${title}</b></p>
-
-        <p><b>Rozwiązanie:</b> ${solution}</p>
-    `;
-}
-</script>
+<p>Trwa przekierowanie…</p>
 
 </body>
 </html>
